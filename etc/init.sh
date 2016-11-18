@@ -4,4 +4,5 @@ sudo /etc/init.d/nginx restart
 
 sudo ln -s ~/web/etc/hello.py /etc/gunicorn.d/hello.py
 gunicorn -c /etc/gunicorn.d/hello.py hello:application &
-gunicorn ~/web/ask/wsgi &
+cd ~/web/ask
+gunicorn wsgi &
