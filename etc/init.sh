@@ -1,4 +1,9 @@
 sudo rm /etc/nginx/sites-enabled/default
 sudo ln -s /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/lesson.conf
 sudo /etc/init.d/nginx restart
-gunicorn -c /home/box/web/ask/ask/wsgi.py &
+
+sudo ln -s /home/box/etc/hello.py /etc/gunicorn.d/hello.py
+gunicorn -c /etc/gunicorn.d/hello.py hello:application &
+
+cd ~/web/ask
+gunicorn wsgi &
