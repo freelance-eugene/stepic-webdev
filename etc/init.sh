@@ -12,3 +12,5 @@ sudo /et/init.d/mysql start
 mysql -uroot -e "CREATE DATABASE IF NOT EXISTS ask;"
 mysql -uroot -e "CREATE USER 'eugene'@'localhost' IDENTIFIED BY 'mypass';"
 mysql -uroot -e "GRANT ALL ON ask.* TO 'eugene'@'localhost'";
+
+python ~/web/ask/managy.py syncdb
