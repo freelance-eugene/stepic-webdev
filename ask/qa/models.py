@@ -1,10 +1,14 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django.contrib import auth
 
 # Create your models here.
+class User(django.contrib.auth.models.User):
+	pass
+
 class Question(models.Model):
+	objects = QuestionManager()
+
 	title = models.CharField(max_length=255)
 	text = models.TextField()
 	added_at = models.DateField()
@@ -12,7 +16,7 @@ class Question(models.Model):
 	author = models.OneToOneField(User)
 	likes = models.ManyToManyField(User)
 
-class QuestionManager:
+class QuestionManager(models.Manager):
 	def new(self):
 		return Question.objects.order_by('added_at').all()
 
@@ -24,6 +28,3 @@ class Answer(models.Model):
 	added_at = models.DateField()
 	question = models.OneToOneField(Question)
 	author = models.OneToOneField(User)
-
-class User(auth.models.User):
-	pass
