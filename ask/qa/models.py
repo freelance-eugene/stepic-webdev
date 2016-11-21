@@ -11,6 +11,7 @@ class CustomUser(User):
 
 
 class QuestionManager(models.Manager):
+	
 	def new(self):
 		return Question.objects.order_by('added_at').all()
 
