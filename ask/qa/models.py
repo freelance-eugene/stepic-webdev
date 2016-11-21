@@ -4,6 +4,17 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class CustomUser(User):
+	class Meta:
+		db_table = 'user'
+		
+class QuestionManager(models.Manager):
+	def new(self):
+		return Question.objects.order_by('added_at').all()
+
+	def popular(self):
+		return Question.objects().order_by('rating').all()
+
 class Question(models.Model):
 	objects = QuestionManager()
 
@@ -14,19 +25,8 @@ class Question(models.Model):
 	author = models.OneToOneField(User)
 	likes = models.ManyToManyField(User)
 
-class QuestionManager(models.Manager):
-	def new(self):
-		return Question.objects.order_by('added_at').all()
-
-	def popular(self):
-		return Question.objects().order_by('rating').all()
-
 class Answer(models.Model):
 	text = models.TextField()
 	added_at = models.DateField()
 	question = models.OneToOneField(Question)
 	author = models.OneToOneField(User)
-
-class CustomUser(User):
-	class Meta:
-		db_table = 'user'
