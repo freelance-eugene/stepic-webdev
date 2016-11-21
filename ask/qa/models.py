@@ -1,11 +1,9 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
-class User(django.contrib.auth.models.User):
-	pass
-
 class Question(models.Model):
 	objects = QuestionManager()
 
@@ -28,3 +26,7 @@ class Answer(models.Model):
 	added_at = models.DateField()
 	question = models.OneToOneField(Question)
 	author = models.OneToOneField(User)
+
+class CustomUser(User):
+	class Meta:
+		db_table = 'user'
