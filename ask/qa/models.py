@@ -5,9 +5,11 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class CustomUser(User):
+	likes = models.ManyToManyField(User)
+	
 	class Meta:
 		db_table = 'user'
-		
+
 class QuestionManager(models.Manager):
 	def new(self):
 		return Question.objects.order_by('added_at').all()
