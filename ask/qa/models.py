@@ -22,8 +22,8 @@ class Question(models.Model):
 	text = models.TextField()
 	added_at = models.DateField()
 	rating = models.IntegerField()
-	author = models.OneToOneField(CustomUser)
-	likes = models.ManyToManyField(CustomUser)
+	author = models.OneToOneField(CustomUser, related_name='question_author')
+	likes = models.ManyToManyField(CustomUser, related_name='question_author')
 
 class Answer(models.Model):
 	text = models.TextField()
