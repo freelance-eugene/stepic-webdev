@@ -10,8 +10,7 @@ class CustomUser(User):
 		db_table = 'user'
 
 
-class QuestionManager(models.Manager):
-	
+class QuestionManager(models.Manager):	
 	def new(self):
 		return Question.objects.order_by('added_at').all()
 
