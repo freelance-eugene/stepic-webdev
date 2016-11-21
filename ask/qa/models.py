@@ -5,8 +5,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class CustomUser(User):
-	likes = models.ManyToManyField(User)
-	
 	class Meta:
 		db_table = 'user'
 
@@ -24,11 +22,11 @@ class Question(models.Model):
 	text = models.TextField()
 	added_at = models.DateField()
 	rating = models.IntegerField()
-	author = models.OneToOneField(User)
-	likes = models.ManyToManyField(User)
+	author = models.OneToOneField(CustomUser)
+	likes = models.ManyToManyField(CustomUser)
 
 class Answer(models.Model):
 	text = models.TextField()
 	added_at = models.DateField()
 	question = models.OneToOneField(Question)
-	author = models.OneToOneField(User)
+	author = models.OneToOneField(CustomUser)
