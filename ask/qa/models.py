@@ -33,4 +33,4 @@ class Answer(models.Model):
 	text = models.TextField()
 	added_at = models.DateField()
 	question = models.OneToOneField(Question)
-	author = models.OneToOneField(CustomUser)
+	author = models.ForeignKey(CustomUser)
