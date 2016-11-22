@@ -5,11 +5,6 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
-class CustomUser(User):
-	class Meta:
-		db_table = 'user'
-
-
 class QuestionManager(models.Manager):	
 	def new(self):
 		return Question.objects.order_by('added_at').all()
@@ -25,12 +20,12 @@ class Question(models.Model):
 	text = models.TextField()
 	added_at = models.DateField()
 	rating = models.IntegerField()
-	author = models.ForeignKey(CustomUser)
-	likes = models.ManyToManyField(CustomUser, related_name='question_author')
+	author = models.ForeignKey(User)
+	likes = models.ManyToManyField(User, related_name='question_author')
 
 
 class Answer(models.Model):
 	text = models.TextField()
 	added_at = models.DateField()
 	question = models.OneToOneField(Question)
-	author = models.ForeignKey(CustomUser)
+	author = models.ForeignKey(User)
